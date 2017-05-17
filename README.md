@@ -1,7 +1,7 @@
 # jQuery 插件 之 ele-scroll
 
- 【API说明】eleScroll()
- 设置重置参数, 如下：
+###【API说明】eleScroll()
+#### 设置重置参数, 如下：
  1. top=>增加或减少差值  类型：Number 默认：0
  2. time=>动画执行时间，单位：秒 默认：1  类型：Number
  3. targetFirst=>第一次调用插件的时候,滚动到指定位置或元素 #div|.div|div|Number
