@@ -42,3 +42,5 @@ $("a").eleScroll({
 > 实例地址
 
 [ele-scroll](http://demo.chenzejiang.com/ele-scroll/index.html){:target="_blank"}
+
+<a href="http://demo.chenzejiang.com/ele-scroll/index.html">ele-scroll</a>
