@@ -11,3 +11,26 @@
  7. initAfter=>初始化插件之后
  8. clickBefore=>事件触发之前
  9. clickAfter=>事件触发之后
+
+> 语法使用
+`$("a").eleScroll({
+ 			top:-50,
+ 			time:1,
+ 			speed:"swing",
+ 			event:"click",
+ 			initBefore:function(){
+ 				console.log("初始化之前");
+ 			},
+ 			initAfter:function(){
+ 				console.log("初始化之后");
+ 			},
+ 			clickBefore:function(){
+ 				console.log("事件触发之前");
+ 			},
+ 			clickAfter:function(){
+ 				console.log("事件触发之后");
+ 			}
+ 		});`
+
+> 实例地址
+[ele-scroll](demo.chenzejiang.com/ele-scroll/index.html)
