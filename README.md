@@ -14,7 +14,9 @@
 
 > 语法使用
 
-`$("a").eleScroll({
+```js
+
+   $("a").eleScroll({
  			top:-50,
  			time:1,
  			speed:"swing",
@@ -31,7 +33,11 @@
  			clickAfter:function(){
  				console.log("事件触发之后");
  			}
- 		});`
+ 	 });
+
+```
+
+
 
 > 实例地址
 
