@@ -13,6 +13,7 @@
  9. clickAfter=>事件触发之后
 
 > 语法使用
+
 `$("a").eleScroll({
  			top:-50,
  			time:1,
@@ -33,4 +34,5 @@
  		});`
 
 > 实例地址
+
 [ele-scroll](demo.chenzejiang.com/ele-scroll/index.html)
