@@ -41,4 +41,4 @@ $("a").eleScroll({
 
 > 实例地址
 
-[ele-scroll](http://demo.chenzejiang.com/ele-scroll/index.html)
+[ele-scroll](http://demo.chenzejiang.com/ele-scroll/index.html?_blank)
