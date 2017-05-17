@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>eleScroll - demo</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		.header{position: fixed;width:100%;height: 50px;line-height: 50px;background: rgba(43,255,0,0.5);}
+
+		.content{padding-bottom:500px;}
+		.content div{width:100%;height: 500px;font-size: 80px;color: #fff;}
+		#div1{background: rgba(0,0,0,0.8);}
+		#div2{background: rgba(0,0,0,0.6);}
+		#div3{background: rgba(0,0,0,0.4);}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<a data-target="#div1" href="javascript:void(0);">div1</a>
+		<a data-target="#div2" href="javascript:void(0);">div2</a>
+		<button data-target="#div3">div3这个按钮没有减少差值</button>
+
+		<button data-target="top">滚动到页面头部</button>
+		<button data-target="bottom">滚动到页面底部</button>
+	</div>
+
+	<div class="content">
+	   <div id="div1">div1</div>
+	   <div id="div2">div2</div>
+	   <div id="div3">div3</div>
+	</div>
+
+	<script src="http://www.chenzejiang.com/cdn/frame/jquery/jquery-1.11.0.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		/*
+		     【API说明】eleScroll()
+		     设置重置参数, 如下：
+		     1.top=>增加或减少差值  类型：Number 默认：0
+		     2.time=>动画执行时间，单位：秒 默认：1  类型：Number
+			 3.targetFirst=>第一次调用插件的时候,滚动到指定位置或元素 #div|.div|div|Number
+			 4.speed 动画的规则 仅支持 swing 快到慢 && linear 匀速  默认：linear  默认jQuery提供"linear" 和 "swing"
+			 5.event 绑定元素触发滚动的事件 默认：click
+			 6.initBefore=>初始化插件之前
+			 7.initAfter=>初始化插件之后
+			 8.clickBefore=>事件触发之前
+			 9.clickAfter=>事件触发之后
+		*/
+		(function ($) {
+			$.fn.eleScroll = function (options) {
+				var settings = {
+					top: 0,
+					time:1,
+					targetFirst:null,
+					speed:"linear",
+					event: 'click',
+					initAfter:function(){},
+					initBefore:function(){},
+					clickBefore:function(){},
+					clickAfter:function(){}
+				};
+				$.extend(true, settings, options);  // 合并
+				// 初始化之前  PS:要写在extend之后
+				settings.initBefore();
+				var windowHeight = $(window).height();        //获取浏览器窗口高度
+				var documentHeight = $(document).height();        //获取文档高度
+				var $thisAll = this;
+				return this.each(function(i){
+					var _this = $(this);
+					var _target = _this.attr("data-target");
+					var _thisTop = 0;
+
+					function animate(flag){
+						var t = (flag===true) ? settings.targetFirst :  _target;
+						if(t != null){
+							if(isNaN(t) === false){  // false => Number
+								_thisTop = Number(t);
+							}else{  // true => Ele
+								if(_target === 'top'){
+									_thisTop = 0;
+								}else if(_target === 'bottom'){
+									_thisTop = documentHeight - windowHeight;
+								}else{
+									_thisTop =  $(t).offset().top + settings.top;
+								}
+							}
+						}
+						$("html,body").animate({scrollTop:_thisTop}, settings.time * 1000,settings.speed);
+					}
+
+					// 如果 targetFirst 有值
+					if(settings.targetFirst != null && $thisAll.length-1 === i){
+						animate(true);
+					}
+
+					_this.on(settings.event,function(){
+						settings.clickBefore();
+						animate();
+						settings.clickAfter();
+						return false;
+					});
+					// 初始化之后 
+					if($thisAll.length-1 === i){
+						settings.initAfter();
+					}
+				});
+			};
+		})(jQuery);
+
+
+		$("a").eleScroll({
+			top:-50,
+			time:1,
+			speed:"swing",
+			event:"click",
+			initBefore:function(){
+				console.log("初始化之前");
+			},
+			initAfter:function(){
+				console.log("初始化之后");
+			},
+			clickBefore:function(){
+				console.log("事件触发之前");
+			},
+			clickAfter:function(){
+				console.log("事件触发之后");
+			}
+		});
+
+		$("button").eleScroll();
+	</script>
+</body>
+</html>
